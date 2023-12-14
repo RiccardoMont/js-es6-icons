@@ -120,7 +120,13 @@ const row = document.querySelector('.row');
 const select = document.createElement('select');
 const filtra = document.createElement('button');
 
-filtra.classList.add('btn', 'btn-primary', 'p-2', 'm-2');
+const div = document.createElement('div');
+const h4 = document.createElement('h4');
+const img = document.createElement('i');
+
+
+
+filtra.classList.add('btn', 'btn-primary', 'w-25');
 
 filtra.append(`Filtra`);
 
@@ -132,11 +138,13 @@ const options = [];
 function creaBox(name, prefix, colore) {
 
     const boxMarkUp = `
-    <div class = 'box'>
-        <h4>${name}</h4>
-        <i class="${prefix}solid ${prefix}${name}"
-        style=" color: ${colore};">
-        </i>
+    <div class='col-3'>
+        <div class ='card d-flex align-items-center mt-3 py-3 bg-primary-subtle'>
+            <h4>${name}</h4>
+            <i class="${prefix}solid ${prefix}${name}"
+            style=" color: ${colore};">
+            </i>
+        </div>
     </div>
     `;
     row.insertAdjacentHTML('beforeend', boxMarkUp);
@@ -170,13 +178,26 @@ function selection(tipo){
 
     select.append(option);
 
+    select.classList.add("text-center", "w-25");
+
     container.append(select);
+
+
 
 }
 
-filtra.addEventListener('click', function() {
-  
-    
-    
-})
+//console.log(selection);
 
+
+
+/*
+filtra.addEventListener('click', function() {
+
+    livingBeing.forEach((item) => {
+
+        
+    })
+      
+
+})
+*/

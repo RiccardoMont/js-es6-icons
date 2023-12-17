@@ -131,6 +131,13 @@ const options = [];
 //Richiamo funzione 'selection' per aggiungere l'option 'All'
 selection('All');
 
+//Funzione randomizzatrice per il colore
+function colorRandomizer(){
+
+	let n = (Math.random() * 0xfffff * 1000000).toString(16);
+  	return '#' + n.slice(0, 6);
+
+}
 
 //Funzione per creare le singole Card
 function creaCard(name, prefix, colore, type) {
@@ -153,6 +160,10 @@ function creaCard(name, prefix, colore, type) {
 
 //Iterazione per creare le Cards e per capire quanti Type differenti ci sono senza creare doppioni
 livingBeing.forEach((item) => {
+
+	
+	item.color = colorRandomizer();
+	console.log(item.color);
 
     creaCard(item.name, item.prefix, item.color, item.type);
 
@@ -214,3 +225,4 @@ select.addEventListener('change', function() {
 })
 
 console.log(options);
+console.log(livingBeing);

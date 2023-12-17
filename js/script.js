@@ -1,5 +1,4 @@
-console.log('mamma mia');
-
+//Array iniziale
 const livingBeing = [
 	{
 		name: 'cat',
@@ -115,33 +114,34 @@ const livingBeing = [
 	}
 ];
 
-const container = document.querySelector('.container')
-const row = document.querySelector('.row');
+//Dichiarazioni globali
+const container = document.querySelector('.container');
 const select = document.createElement('select');
-const filtra = document.createElement('button');
+const h2 = document.createElement('h2');
 
-const div = document.createElement('div');
-const h4 = document.createElement('h4');
-const img = document.createElement('i');
+//Posizionamento titolo al di sopra del Select
+h2.classList.add('text-center', 'w-100', 'fw-bold');
+h2.append('Filter your items');
+container.append(h2);
 
-
-
-filtra.classList.add('btn', 'btn-primary', 'w-25');
-
-filtra.append(`Filtra`);
-
-container.append(filtra);
-
+//Array di appoggio per dinamicizzare le option del Select
 const options = [];
 
 
-function creaBox(name, prefix, colore) {
+//Richiamo funzione 'selection' per aggiungere l'option 'All'
+selection('All');
+
+
+//Funzione per creare le singole Card
+function creaCard(name, prefix, colore, type) {
+
+	const row = document.querySelector('.row');
 
     const boxMarkUp = `
-    <div class='col-3'>
+    <div class='col-3 ${type}'>
         <div class ='card d-flex align-items-center mt-3 py-3 bg-primary-subtle'>
             <h4>${name}</h4>
-            <i class="${prefix}solid ${prefix}${name}"
+            <i class="${prefix}solid ${prefix}2x ${prefix}${name}"
             style=" color: ${colore};">
             </i>
         </div>
@@ -151,9 +151,10 @@ function creaBox(name, prefix, colore) {
 
 }
 
+//Iterazione per creare le Cards e per capire quanti Type differenti ci sono senza creare doppioni
 livingBeing.forEach((item) => {
 
-    creaBox(item.name, item.prefix, item.color);
+    creaCard(item.name, item.prefix, item.color, item.type);
 
     if (options.includes(item.type)){
 
@@ -169,7 +170,7 @@ livingBeing.forEach((item) => {
 
 })
 
-
+//Creazione del Select e delle options in maniera dinamica 
 function selection(tipo){
 
     const option = document.createElement('option');
@@ -178,26 +179,38 @@ function selection(tipo){
 
     select.append(option);
 
-    select.classList.add("text-center", "w-25");
+    select.classList.add("text-center", "w-25", "form-select", "bg-primary-subtle");
 
     container.append(select);
 
-
-
 }
 
-//console.log(selection);
+//addEventListener direttamente sulle options
+select.addEventListener('change', function() {
 
+	const col3 = document.querySelectorAll('.col-3');
 
+	const filtrati = Array.from(col3).filter(elem => {
 
-/*
-filtra.addEventListener('click', function() {
+		if (elem.classList.contains(select.value)){
 
-    livingBeing.forEach((item) => {
+			elem.classList.remove('d-none');
+			
+		} else if (select.value === 'All'){
 
-        
-    })
-      
+			elem.classList.remove('d-none');
+
+		} else {
+
+			elem.classList.add('d-none');
+
+		}
+
+		return elem;
+	})
+
+	console.log(filtrati);	
 
 })
-*/
+
+console.log(options);
